@@ -437,7 +437,10 @@ sudo ln -sf /usr/lib/systemd/user/cros-garcon.service \
 
 echo "[9/10] Create BTRFS raw image"
 
+echo "IMAGE_SIZE=${IMAGE_SIZE}"
 truncate -s "${IMAGE_SIZE}" "${IMG}"
+ls -lh "${IMG}"
+stat -c 'Logical size: %s bytes' "${IMG}"
 sudo mkfs.btrfs -f -L arch-baguette "${IMG}"
 
 MNT="$(mktemp -d)"
